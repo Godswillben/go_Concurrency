@@ -3,10 +3,9 @@ package main
 import (
 	"fmt"
 	"strings"
-	"time"
 )
 
-func shout(ping chan string, pong chan string){
+func shout(ping chan string, pong chan string) {
 	for {
 		s := <-ping
 
@@ -14,12 +13,12 @@ func shout(ping chan string, pong chan string){
 	}
 }
 
-func main(){
+func main() {
 	ping := make(chan string)
 	pong := make(chan string)
 
 	go shout(ping, pong)
-	
+
 	fmt.Println("Type something and press Enter (Enter Q to quit)")
 
 	for {
@@ -30,13 +29,13 @@ func main(){
 		var userInput string
 		_, _ = fmt.Scanln(&userInput)
 
-		if userInput == strings.ToLower("q"){ // code to be changed
+		if userInput == strings.ToLower("q") { // code to be changed
 			break
 		}
 
 		ping <- userInput
 		// wait for a response
-		response := <- pong
+		response := <-pong
 		fmt.Println("Response: ", response)
 	}
 
