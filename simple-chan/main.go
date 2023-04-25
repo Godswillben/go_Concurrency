@@ -39,4 +39,8 @@ func main(){
 		response := <- pong
 		fmt.Println("Response: ", response)
 	}
+
+	fmt.Println("All done. Closing channels.")
+	close(ping)
+	close(pong)
 }
