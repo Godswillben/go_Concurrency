@@ -20,5 +20,23 @@ func main(){
 
 	go shout(ping, pong)
 	
-	time.Sleep(10 * time.Second)
+	fmt.Println("Type something and press Enter (Enter Q to quit)")
+
+	for {
+		// print a prompt
+		fmt.Print("-> ")
+
+		// get user input
+		var userInput string
+		_, _ = fmt.Scanln(&userInput)
+
+		if userInput == strings.ToLower("q"){ // code to be changed
+			break
+		}
+
+		ping <- userInput
+		// wait for a response
+		response := <- pong
+		fmt.Println("Response: ", response)
+	}
 }
